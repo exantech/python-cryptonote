@@ -22,7 +22,7 @@ void checkSignatureSize(const std::string& signature) {
     }
 }
 
-std::string sign(const std::string& message, const std::string& secretKeyStr, const std::string& publicKeyStr) {
+PyObject* sign(const std::string& message, const std::string& secretKeyStr, const std::string& publicKeyStr) {
     checkPublicKeySize(publicKeyStr);
     checkSecretKeySize(secretKeyStr);
 
@@ -33,7 +33,7 @@ std::string sign(const std::string& message, const std::string& secretKeyStr, co
     crypto::signature signature;
     crypto::generate_signature(hash, pub, secret, signature);
 
-    return std::string(reinterpret_cast<char*>(&signature), sizeof(signature));
+    return PyBytes_FromStringAndSize(reinterpret_cast<char*>(&signature), sizeof(signature));
 }
 
 bool check_signature(const std::string& message, const std::string& publicKeyStr, const std::string& signatureStr) {
