@@ -13,10 +13,10 @@ if (${PYTHON_VERSION_MAJOR} EQUAL 3)
     endif()
 endif()
 
-find_package(Boost COMPONENTS system ${BOOST_PYTHON_LIB})
+find_package(Boost REQUIRED COMPONENTS system ${BOOST_PYTHON_LIB})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -maes")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -maes -std=c11")
 
 include_directories(${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 link_libraries(${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
